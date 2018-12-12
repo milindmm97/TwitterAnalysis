@@ -1,4 +1,4 @@
 # TwitterAnalysis
-An R data sceince projects which performs sentiment analysis on tweets
+An R data science project which performs sentiment analysis on tweets
 
 
