@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html \n(link for pos neg words)\n\nhttps://datascienceplus.com/sentiment-analysis-with-machine-learning-in-r/\n\nhttps://www.analyticsvidhya.com/blog/2014/07/world-cheering-2014-fifa-wc-winner-twitter/\n\nhttps://analytics4all.org/2016/11/25/r-twitter-sentiment-analysis/",
+    "created" : 1503406726265.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3285159612",
+    "id" : "B6715FFC",
+    "lastKnownWriteTime" : 1503407803,
+    "last_content_update" : 1503414205074,
+    "path" : "D:/DataAnalytics/Sentiment_analysis/text",
+    "project_path" : "text",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "score.sentiment = function(tweets, pos.words, neg.words)\n  \n{\n  \n  require(plyr)\n  require(stringr)\n  \n  scores = laply(tweets, function(tweet, pos.words, neg.words) {\n    \n    \n    \n    tweet = gsub('https://','',tweet) # removes https://\n    tweet = gsub('http://','',tweet) # removes http://\n    tweet=gsub('[^[:graph:]]', ' ',tweet) ## removes graphic characters \n    #like emoticons \n    tweet = gsub('[[:punct:]]', '', tweet) # removes punctuation \n    tweet = gsub('[[:cntrl:]]', '', tweet) # removes control characters\n    tweet = gsub('\\\\d+', '', tweet) # removes numbers\n    tweet=str_replace_all(tweet,\"[^[:graph:]]\", \" \") \n    \n    tweet = tolower(tweet) # makes all letters lowercase\n    \n    word.list = str_split(tweet, '\\\\s+') # splits the tweets by word in a list\n    \n    words = unlist(word.list) # turns the list into vector\n    \n    pos.matches = match(words, pos.words) ## returns matching \n    #values for words from list \n    neg.matches = match(words, neg.words)\n    \n    pos.matches = !is.na(pos.matches) ## converts matching values to true of false\n    neg.matches = !is.na(neg.matches)\n    \n    score = sum(pos.matches) - sum(neg.matches) # true and false are \n    #treated as 1 and 0 so they can be added\n    \n    return(score)\n    \n  }, pos.words, neg.words )\n  \n  scores.df = data.frame(score=scores, text=tweets)\n  \n  return(scores.df)\n  \n}",
+    "created" : 1503407737628.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1570439646",
+    "id" : "5F48CD4E",
+    "lastKnownWriteTime" : 1503407782,
+    "last_content_update" : 1503407782352,
+    "path" : "D:/DataAnalytics/Sentiment_analysis/anlys.R",
+    "project_path" : "anlys.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

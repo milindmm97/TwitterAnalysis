@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(stringr)\nlibrary(twitteR)\nlibrary(xlsx)\nlibrary(plyr)\n\napi_key<- \"SfOXeq5JkZfGhK4MkEpzIExqB\"\napi_secret <- \"6RdpLsQlzxUXeNS84PlrfKedJ0iuXN1cCbpU0AZx65kgcHsdta\"\naccess_token <- \"1009310760-BMJia7jbEmhA0mMWOfcdt6U6w16U8xb4OEtmZOd\"\naccess_token_secret <- \"xbkxGbH2e4z4pLFuoTvAMOXzwdR1ccGycFP9sCTJxX9aW\"\nsetup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)\n\n#setwd() open folder containing pos and neg words txt\nneg = scan(\"negative-words.txt\", what=\"character\", comment.char=\";\")\npos = scan(\"positive-words.txt\", what=\"character\", comment.char=\";\")\nneg = c(neg,'corruption')\nneg = c(neg, 'wtf')\ntweets = searchTwitter('Modi',n=1000)\nTweets.text = laply(tweets,function(t)t$getText()) # gets text from Tweets\n\n\nscore.sentiment <- function(sentences, pos.words, neg.words, .progress='none')\n{\n  require(plyr)\n  require(stringr)\n  scores <- laply(sentences, function(sentence, pos.words, neg.words){\n    sentence <- gsub('[[:punct:]]', \"\", sentence)\n    sentence <- gsub('[[:cntrl:]]', \"\", sentence)\n    sentence <- gsub('\\d+', \"\", sentence)\n    sentence <- tolower(sentence)\n    word.list <- str_split(sentence, '\\s+')\n    words <- unlist(word.list)\n    pos.matches <- match(words, pos.words)\n    neg.matches <- match(words, neg.words)\n    pos.matches <- !is.na(pos.matches)\n    neg.matches <- !is.na(neg.matches)\n    score <- sum(pos.matches) - sum(neg.matches)\n    return(score)\n  }, pos.words, neg.words, .progress=.progress)\n  scores.df <- data.frame(score=scores, text=sentences)\n  return(scores.df)\n}\npos.words <- c(pos, 'upgrade')\nneg.words <- c(neg, 'wtf', 'wait', 'waiting', 'epicfail')\n\nanalysis = score.sentiment(Tweets.text, pos, neg) ",
+    "created" : 1503406032932.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2526150663",
+    "id" : "DF6BF150",
+    "lastKnownWriteTime" : 1503411329,
+    "last_content_update" : 1503411694268,
+    "path" : "D:/DataAnalytics/Sentiment_analysis/Code.R",
+    "project_path" : "Code.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

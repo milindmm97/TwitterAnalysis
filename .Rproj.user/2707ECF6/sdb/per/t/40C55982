@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(stringr)\nlibrary(twitteR)\nlibrary(xlsx)\nlibrary(plyr)\n\napi_key<- \"SfOXeq5JkZfGhK4MkEpzIExqB\"\napi_secret <- \"6RdpLsQlzxUXeNS84PlrfKedJ0iuXN1cCbpU0AZx65kgcHsdta\"\naccess_token <- \"1009310760-BMJia7jbEmhA0mMWOfcdt6U6w16U8xb4OEtmZOd\"\naccess_token_secret <- \"xbkxGbH2e4z4pLFuoTvAMOXzwdR1ccGycFP9sCTJxX9aW\"\nsetup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)\n\nsetwd() #open folder containing pos and neg words txt\nneg = scan(\"negative-words.txt\", what=\"character\", comment.char=\";\")\npos = scan(\"positive-words.txt\", what=\"character\", comment.char=\";\")\nneg = c(neg,'corruption')\nneg = c(neg, 'wtf')\ntweets = searchTwitter('Modi',n=1000)\nTweets.text = laply(tweets,function(t)t$getText()) # gets text from Tweets\n\n\nscore.sentiment = function(tweets, pos.words, neg.words)\n  \n  \n{\n  \n  require(plyr)\n  require(stringr)\n  \n  scores = laply(tweets, function(tweet, pos.words, neg.words) {\n    \n    \n    \n    tweet = gsub('https://','',tweet) # removes https://\n    tweet = gsub('http://','',tweet) # removes http://\n    tweet=gsub('[^[:graph:]]', ' ',tweet) ## removes graphic characters \n    #like emoticons \n    tweet = gsub('[[:punct:]]', '', tweet) # removes punctuation \n    tweet = gsub('[[:cntrl:]]', '', tweet) # removes control characters\n    tweet = gsub('\\\\d+', '', tweet) # removes numbers\n    tweet=str_replace_all(tweet,\"[^[:graph:]]\", \" \") \n    \n    tweet = tolower(tweet) # makes all letters lowercase\n    \n    word.list = str_split(tweets, '\\\\s+') # splits the tweets by word in a list\n    \n    words = unlist(word.list) # turns the list into vector\n    \n    pos.matches = match(words, pos.words) ## returns matching \n    #values for words from list \n    neg.matches = match(words, neg.words)\n    \n    pos.matches = !is.na(pos.matches) ## converts matching values to true of false\n    neg.matches = !is.na(neg.matches)\n    \n    score = sum(pos.matches) - sum(neg.matches) # true and false are \n    #treated as 1 and 0 so they can be added\n    \n    return(score)\n    \n  }, pos.words, neg.words )\n  \n  scores.df = data.frame(score=scores, text=tweets)\n  \n  return(scores.df)\n  \n}\n\nanalysis = score.sentiment(Tweets.text, pos, neg) ",
+    "created" : 1503416846843.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "289263634",
+    "id" : "40C55982",
+    "lastKnownWriteTime" : 1503411329,
+    "last_content_update" : 1503411329,
+    "path" : "D:/DataAnalytics/Sentiment_analysis/Code.R",
+    "project_path" : "Code.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

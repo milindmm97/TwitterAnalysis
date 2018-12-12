@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "8901018 pin \nsetup_twitter_oauth(\"API key\", \"API secret\", \"Access token\", \"Access secret\")\n\n[1] \"Using direct authentication\"\nUse a local file ('.httr-oauth'), to cache OAuth access credentials between R sessions?\n\n1: Yes\n2: No\n\nSelection: yes\nEnter an item from the menu, or 0 to exit\nSelection: 1\nAdding .httr-oauth to .gitignore\n\n\n\n",
+    "created" : 1503317209999.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "595423757",
+    "id" : "49C49CFD",
+    "lastKnownWriteTime" : 1503416374,
+    "last_content_update" : 1503416375485,
+    "path" : "D:/DataAnalytics/Sentiment_analysis/text2",
+    "project_path" : "text2",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}
